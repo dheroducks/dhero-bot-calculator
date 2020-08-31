@@ -28,11 +28,14 @@
         const error = document.getElementById("error-information");
         const success = document.getElementById("success-information");
         const parsedInput = Number(inputtedTotal);
+        console.log("parsedInput", parsedInput);
         success.textContent = "";
         if (isNaN(parsedInput) || parsedInput === 0) {
           error.textContent =
             "Please input a number, without any spaces, commas, or other characters.";
           return;
+        } else if (parsedInput < 0) {
+          error.textContent = "Getting wise, huh? Insert a positive number.";
         } else {
           error.textContent = "";
         }
@@ -43,20 +46,29 @@
         let totalPoints = 0;
         let botLevel = 0;
         let modifier = 1.06;
-        const resultNode = document.createElement("ul");
+        if (isNaN(parsedInput) || parsedInput === 0) {
+          const resultNode = document.createElement("ul");
           for (botLevel = 5; totalPoints < parsedInput; botLevel += 5) {
             totalPoints += Math.round(botLevel * 23 * modifier);
           }
           const botLevelListItem = document.createElement("li");
           const breakersListItem = document.createElement("li");
           const totalPointsListItem = document.createElement("li");
-          botLevelListItem.textContent = `Bot Level: ${botLevel}`;
-          breakersListItem.textContent = `Breakers: ${botLevel / 5}`;
-          totalPointsListItem.textContent = `Total Points: ${totalPoints}`;
+          const replacedTotalPoints = totalPoints
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+          botLevelListItem.textContent = `Bot Level: ${botLevel
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+          breakersListItem.textContent = `Breakers: ${(botLevel / 5)
+            .toString()
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")}`;
+          totalPointsListItem.textContent = `Total Points: ${replacedTotalPoints}`;
           resultNode.appendChild(botLevelListItem);
           resultNode.appendChild(breakersListItem);
           resultNode.appendChild(totalPointsListItem);
           success.appendChild(resultNode);
+        }
       };
       submitButton.addEventListener("click", calculateInformation, false);
     </script>
