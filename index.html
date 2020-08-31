@@ -12,7 +12,12 @@
       }
     </style>
     <label for="point-total">Point Total Desired:</label>
-    <input id="point-total" placeholder="Point total desired." type="number" pattern="[0-9]*"/>
+    <input
+      id="point-total"
+      placeholder="Point total desired."
+      type="number"
+      pattern="[0-9]*"
+    />
     <button id="start-calculation">Calculate data</button>
     <div id="error-information"></div>
     <div id="success-information"></div>
@@ -24,7 +29,7 @@
         const success = document.getElementById("success-information");
         const parsedInput = Number(inputtedTotal);
         success.textContent = "";
-        if (isNaN(parsedInput)) {
+        if (isNaN(parsedInput) || parsedInput === 0) {
           error.textContent =
             "Please input a number, without any spaces, commas, or other characters.";
           return;
@@ -38,39 +43,22 @@
         let totalPoints = 0;
         let botLevel = 0;
         let modifier = 1.06;
-        for (botLevel = 5; totalPoints < parsedInput; botLevel += 5) {
-          totalPoints += Math.round(botLevel * 23 * modifier);
-          // participationPoints += 2 * botLevel;
-          // finderPoints += 3 * botLevel;
-          // finisherPoints += 4 * botLevel;
-          // damagePoints += 7 * botLevel;
-        }
         const resultNode = document.createElement("ul");
-        const botLevelListItem = document.createElement("li");
-        const breakersListItem = document.createElement("li");
-        const participationListItem = document.createElement("li");
-        const finderListItem = document.createElement("li");
-        const finisherListItem = document.createElement("li");
-        const tenPercentDamageListItem = document.createElement("li");
-        const mostDamageListItem = document.createElement("li");
-        const totalPointsListItem = document.createElement("li");
-        botLevelListItem.textContent = `Bot Level: ${botLevel}`;
-        breakersListItem.textContent = `Breakers: ${botLevel / 5}`;
-        // participationListItem.textContent = `Participation Points: ${participationPoints}`;
-        // finderListItem.textContent = `Finder Points: ${finderPoints}`;
-        // finisherListItem.textContent = `Finisher Points: ${finisherPoints}`;
-        // tenPercentDamageListItem.textContent = `10% Damage Points: ${damagePoints}`;
-        // mostDamageListItem.textContent = `Most Damage Points: ${damagePoints}`;
-        totalPointsListItem.textContent = `Total Points: ${totalPoints}`;
-        resultNode.appendChild(botLevelListItem);
-        resultNode.appendChild(breakersListItem);
-        // resultNode.appendChild(participationListItem);
-        // resultNode.appendChild(finderListItem);
-        // resultNode.appendChild(finisherListItem);
-        // resultNode.appendChild(tenPercentDamageListItem);
-        // resultNode.appendChild(mostDamageListItem);
-        resultNode.appendChild(totalPointsListItem);
-        success.appendChild(resultNode);
+        if (isNaN(parsedInput) || parsedInput === 0) {
+          for (botLevel = 5; totalPoints < parsedInput; botLevel += 5) {
+            totalPoints += Math.round(botLevel * 23 * modifier);
+          }
+          const botLevelListItem = document.createElement("li");
+          const breakersListItem = document.createElement("li");
+          const totalPointsListItem = document.createElement("li");
+          botLevelListItem.textContent = `Bot Level: ${botLevel}`;
+          breakersListItem.textContent = `Breakers: ${botLevel / 5}`;
+          totalPointsListItem.textContent = `Total Points: ${totalPoints}`;
+          resultNode.appendChild(botLevelListItem);
+          resultNode.appendChild(breakersListItem);
+          resultNode.appendChild(totalPointsListItem);
+          success.appendChild(resultNode);
+        }
       };
       submitButton.addEventListener("click", calculateInformation, false);
     </script>
