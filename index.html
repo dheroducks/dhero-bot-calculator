@@ -44,7 +44,6 @@
         let botLevel = 0;
         let modifier = 1.06;
         const resultNode = document.createElement("ul");
-        if (isNaN(parsedInput) || parsedInput === 0) {
           for (botLevel = 5; totalPoints < parsedInput; botLevel += 5) {
             totalPoints += Math.round(botLevel * 23 * modifier);
           }
@@ -58,7 +57,6 @@
           resultNode.appendChild(breakersListItem);
           resultNode.appendChild(totalPointsListItem);
           success.appendChild(resultNode);
-        }
       };
       submitButton.addEventListener("click", calculateInformation, false);
     </script>
