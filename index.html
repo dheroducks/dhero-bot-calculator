@@ -37,16 +37,13 @@
         let damagePoints = 0;
         let totalPoints = 0;
         let botLevel = 0;
+        let modifier = 1.06;
         for (botLevel = 5; totalPoints < parsedInput; botLevel += 5) {
-          participationPoints += 2 * botLevel;
-          finderPoints += 3 * botLevel;
-          finisherPoints += 4 * botLevel;
-          damagePoints += 7 * botLevel;
-          totalPoints =
-            participationPoints +
-            finderPoints +
-            finisherPoints +
-            2 * damagePoints;
+          totalPoints += Math.round(botLevel * 23 * modifier);
+          // participationPoints += 2 * botLevel;
+          // finderPoints += 3 * botLevel;
+          // finisherPoints += 4 * botLevel;
+          // damagePoints += 7 * botLevel;
         }
         const resultNode = document.createElement("ul");
         const botLevelListItem = document.createElement("li");
@@ -59,19 +56,19 @@
         const totalPointsListItem = document.createElement("li");
         botLevelListItem.textContent = `Bot Level: ${botLevel}`;
         breakersListItem.textContent = `Breakers: ${botLevel / 5}`;
-        participationListItem.textContent = `Participation Points: ${participationPoints}`;
-        finderListItem.textContent = `Finder Points: ${finderPoints}`;
-        finisherListItem.textContent = `Finisher Points: ${finisherPoints}`;
-        tenPercentDamageListItem.textContent = `10% Damage Points: ${damagePoints}`;
-        mostDamageListItem.textContent = `Most Damage Points: ${damagePoints}`;
+        // participationListItem.textContent = `Participation Points: ${participationPoints}`;
+        // finderListItem.textContent = `Finder Points: ${finderPoints}`;
+        // finisherListItem.textContent = `Finisher Points: ${finisherPoints}`;
+        // tenPercentDamageListItem.textContent = `10% Damage Points: ${damagePoints}`;
+        // mostDamageListItem.textContent = `Most Damage Points: ${damagePoints}`;
         totalPointsListItem.textContent = `Total Points: ${totalPoints}`;
         resultNode.appendChild(botLevelListItem);
         resultNode.appendChild(breakersListItem);
-        resultNode.appendChild(participationListItem);
-        resultNode.appendChild(finderListItem);
-        resultNode.appendChild(finisherListItem);
-        resultNode.appendChild(tenPercentDamageListItem);
-        resultNode.appendChild(mostDamageListItem);
+        // resultNode.appendChild(participationListItem);
+        // resultNode.appendChild(finderListItem);
+        // resultNode.appendChild(finisherListItem);
+        // resultNode.appendChild(tenPercentDamageListItem);
+        // resultNode.appendChild(mostDamageListItem);
         resultNode.appendChild(totalPointsListItem);
         success.appendChild(resultNode);
       };
