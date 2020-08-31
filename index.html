@@ -46,7 +46,7 @@
         let totalPoints = 0;
         let botLevel = 0;
         let modifier = 1.06;
-        if (isNaN(parsedInput) || parsedInput === 0) {
+        if (!isNaN(parsedInput) || !parsedInput === 0) {
           const resultNode = document.createElement("ul");
           for (botLevel = 5; totalPoints < parsedInput; botLevel += 5) {
             totalPoints += Math.round(botLevel * 23 * modifier);
